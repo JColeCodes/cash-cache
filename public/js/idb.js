@@ -54,7 +54,10 @@ function uploadTransaction() {
                     const budgetObjectStore = transaction.objectStore('new_transaction');
                     budgetObjectStore.clear();
 
-                    alert('Budget successfully updated!')
+                    submitMessageP.textContent = 'Budget successfully updated!';
+                    if (submitMessageButton.classList !== "") {
+                        submitMessageButton.classList.remove("hidden");
+                    }
                 })
                 .catch(err => console.log(err));
         }

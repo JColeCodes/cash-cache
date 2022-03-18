@@ -18,23 +18,27 @@ self.addEventListener('install', function(e) {
             return cache.addAll(FILES_TO_CACHE);
         })
     );
-    self.skipWaiting();
 });
 
 self.addEventListener('activate', function(e) {
     e.waitUntil(
         caches.keys().then(keyList => {
+            let cacheKeepList = keyList.filter(key => {
+                return key.indexOf(APP_PREFIX);
+            });
+            cacheKeepList.push(CACHE_NAME);
+            cacheKeepList.push(DATA_CACHE_NAME);
+
             return Promise.all(
-                keyList.map(key => {
-                    if (key !== CACHE_NAME) {
-                        console.log('Removing old cache data', key);
-                        return caches.delete(key);
+                keyList.map((key, i) => {
+                    if (cacheKeepList.indexOf(key) === -1) {
+                        console.log('Removing old cache data', keyList[i]);
+                        return caches.delete(keyList[i]);
                     }
                 })
             );
         })
     );
-    self.clients.claim();
 });
 
 self.addEventListener('fetch', function(e) {

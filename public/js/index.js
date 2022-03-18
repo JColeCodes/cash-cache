@@ -144,10 +144,43 @@ function sendTransaction(isAdding) {
   });
 }
 
+const submitMessageP = document.querySelector("#submit-message");
+const submitMessageButton = document.querySelector("#submit-message-ok");
+const offlineMessageP = document.querySelector("#offline-message");
+
+if (submitMessageP.textContent === "") {
+  submitMessageButton.classList.add("hidden");
+}
+submitMessageButton.onclick = () => {
+  submitMessageP.textContent = "";
+  submitMessageButton.classList.add("hidden");
+}
+
+function submitMessage() {
+  if (navigator.onLine) {
+    submitMessageP.textContent = "Your transaction has been successfully charted!";
+  } else {
+    submitMessageP.textContent = "Your transaction is saved to the cache and will be added when you're online again.";
+  }
+
+  if (submitMessageButton.classList !== "") {
+    submitMessageButton.classList.remove("hidden");
+  }
+}
+
+window.addEventListener('offline', () => {
+  offlineMessageP.textContent = "You are offline, but don't worry! All your transactions will be saved.";
+});
+window.addEventListener('online', () => {
+  offlineMessageP.textContent = "";
+});
+
 document.querySelector("#add-btn").onclick = function() {
   sendTransaction(true);
+  submitMessage();
 };
 
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
+  submitMessage();
 };
