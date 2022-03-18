@@ -6,6 +6,16 @@ body {
 button, input {
   font-size: 100%;
   font-family: Arial;
+  padding: 8px;
+  margin: 2px 0;
+}
+button {
+  background-color: #6666FF;
+  border: none;
+  color: white;
+}
+input {
+  border: 1px solid #dddddd;
 }
 
 table {
@@ -16,6 +26,9 @@ td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+th {
+  color: #6666FF;
 }
 
 tr:nth-child(even) {
@@ -34,6 +47,7 @@ tr:nth-child(even) {
 
 .total {
   font-size: 150%;
+  padding: 10px 0 0;
   text-decoration: underline;
 }
 
@@ -50,6 +64,60 @@ tr:nth-child(even) {
   margin: 0 auto;
 }
 
+.submit-message {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+.submit-message p {
+  padding: 10px;
+  margin: 0;
+}
+
 .hidden { 
   display: none;
+}
+
+::-moz-selection {
+  color: white;
+  background: #6666FF;
+}
+::selection {
+  color: white;
+  background: #6666FF;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+}
+::-webkit-scrollbar-thumb {
+  background: #6666FF;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6666FF;
+}
+
+@media screen and (max-width: 560px) {
+  input {
+    width: calc(50% - 24px);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  button {
+    width: 100%;
+  }
+  input {
+    width: calc(100% - 24px);
+  }
+  .submit-message button {
+    flex: 1;
+  }
 }
